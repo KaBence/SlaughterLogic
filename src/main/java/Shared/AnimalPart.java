@@ -6,6 +6,9 @@ public class AnimalPart {
     private double weight;
     private int animalId;
 
+    public AnimalPart() {
+    }
+
     public AnimalPart(int id, String name, double weight, int animalId) {
         this.id = id;
         this.name = name;
