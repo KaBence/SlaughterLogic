@@ -38,4 +38,8 @@ public class AnimalPart {
     public int getAnimalId() {
         return animalId;
     }
+
+    public String toString(){
+        return id+" "+name+" "+weight+" AnimalID ->" +animalId;
+    }
 }
