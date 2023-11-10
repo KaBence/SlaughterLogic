@@ -68,7 +68,7 @@ public class StartClient {
                             System.out.println(item);
                         }
                     } catch( HttpClientErrorException ex ) {
-                        System.out.println( "*** Something went wrong in fetchAllFriends ***" );
+                        System.out.println( "*** Something went wrong in Getting animals ***" );
                     }
                     break;
                 case 4:
@@ -78,7 +78,7 @@ public class StartClient {
                             System.out.println(item);
                         }
                     } catch( HttpClientErrorException ex ) {
-                        System.out.println( "*** Something went wrong in fetchAllFriends ***" );
+                        System.out.println( "*** Something went wrong in Getting animal parts ***" );
                     }
                     break;
                 case 5:
