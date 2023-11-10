@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.yaml.snakeyaml.reader.UnicodeReader;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -79,6 +80,11 @@ public class StartClient {
                     } catch( HttpClientErrorException ex ) {
                         System.out.println( "*** Something went wrong in fetchAllFriends ***" );
                     }
+                    break;
+                case 5:
+                    flag = false;
+                    System.out.println("Fuck you");
+                    System.out.println("╭∩╮（︶_︶）╭∩╮");
                     break;
                 default:
                     System.out.println("Wrong id");
