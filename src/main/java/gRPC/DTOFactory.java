@@ -11,8 +11,9 @@ public class DTOFactory {
 
     public static DTOAnimal createDTOAnimal(Animal animal){
         return DTOAnimal.newBuilder()
-                .setDod(animal.getDod())
+
                 .setWeight(animal.getWeight())
+                .setDod(animal.getDod())
                 .setFarm(animal.getFarm())
                 .build();
     }
