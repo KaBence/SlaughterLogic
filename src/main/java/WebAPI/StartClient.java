@@ -9,6 +9,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -32,11 +33,13 @@ public class StartClient {
 
             switch (choice){
                 case 1:
-                    System.out.print("ID : ");
-                    int id=scanner.nextInt();
+                    System.out.print("Date of Death (dd/mm/yyyy): ");
+                    String  date=scanner.next();
                     System.out.println("Weight: ");
                     Double weight=scanner.nextDouble();
-                    Animal x=new Animal(id,weight);
+                    System.out.println("Farm : ");
+                    int farm= scanner.nextInt();
+                    Animal x=new Animal(weight,date,farm);
                     try {
                         rest.put( URL + "animal/" + x.getId(), x );
                     } catch( HttpClientErrorException ex ) {
@@ -47,8 +50,10 @@ public class StartClient {
                     System.out.print("AnimalID : ");
                     int animalId=scanner.nextInt();
                     System.out.println("Weight: ");
-                    String animalName=scanner.next();
-                    AnimalPart y=new AnimalPart(animalName,animalId);
+                    Double pWeight=scanner.nextDouble();
+                    System.out.println("Name : ");
+                    String name=scanner.next();
+                    AnimalPart y=new AnimalPart(name,pWeight,animalId);
                     try {
                         rest.put( URL + "animalpart/" + y.getAnimalId(), y );
                     } catch( HttpClientErrorException ex ) {

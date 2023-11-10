@@ -22,22 +22,26 @@ public class ClientImplementation {
         return null;
     }
 
-    public ArrayList<Animal> getAnimals(){
+    public Animal[] getAnimals(){
         GetAnimalsReq req=DTOFactory.createGetAnimalsReq();
         GetAnimalsRes res=slaughterStub.getAnimals(req);
-        ArrayList<Animal> temp=new ArrayList<>();
-        for(DTOAnimal item:res.getOminousList()){
-            temp.add(DTOFactory.createAnimal(item));
+        Animal[] temp=new Animal[res.getOminousList().size()];
+        int counter=0;
+        for (DTOAnimal item:res.getOminousList()){
+            temp[counter]=DTOFactory.createAnimal(item);
+            counter++;
         }
         return temp;
     }
 
-    public ArrayList<AnimalPart> getAnimalParts(){
+    public AnimalPart[] getAnimalParts(){
         GetAnimalPartsReq req=DTOFactory.createGetAnimalPartsReq();
         GetAnimalPartsRes res=slaughterStub.getAnimalParts(req);
-        ArrayList<AnimalPart> temp=new ArrayList<>();
-        for(DTOAnimalPart item: res.getOminousList()){
-            temp.add(DTOFactory.createAnimalPart(item));
+        AnimalPart[] temp=new AnimalPart[res.getOminousCount()];
+        int counter=0;
+        for (DTOAnimalPart item:res.getOminousList()){
+            temp[counter]=DTOFactory.createAnimalPart(item);
+            counter++;
         }
         return temp;
     }

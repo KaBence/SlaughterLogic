@@ -32,10 +32,10 @@ public class StartClient {
                     int id=scanner.nextInt();
                     System.out.println("Weight: ");
                     Double weight=scanner.nextDouble();
-                    System.out.println(client.insertAnimal(new Animal(id,weight)));
+                    //System.out.println(client.insertAnimal(new Animal(id,weight)));
                     break;
                 case 3:
-                    ArrayList<Animal> animals=client.getAnimals();
+                    Animal[] animals=client.getAnimals();
                     for (Animal item: animals)
                         System.out.println(item);
                     break;

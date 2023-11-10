@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 public class SlaughterController {
     private ClientImplementation client;
@@ -18,7 +20,7 @@ public class SlaughterController {
 
     @GetMapping("animal")
     public synchronized ResponseEntity<Animal[]> getAllAnimals(){
-        Animal[] allAnimals=client.getAnimals().toArray(new Animal[client.getAnimals().size()]);
+        Animal[] allAnimals=client.getAnimals();
         return new ResponseEntity<Animal[]>(allAnimals, HttpStatus.OK);
     }
 
@@ -32,7 +34,7 @@ public class SlaughterController {
 
     @GetMapping("animalpart")
     public synchronized ResponseEntity<AnimalPart[]> getAllAnimalParts(){
-        AnimalPart[] allAnimalParts=client.getAnimalParts().toArray(new AnimalPart[client.getAnimalParts().size()]);
+        AnimalPart[] allAnimalParts=client.getAnimalParts();
         return new ResponseEntity<AnimalPart[]>(allAnimalParts, HttpStatus.OK);
     }
 

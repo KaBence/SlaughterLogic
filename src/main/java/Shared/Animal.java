@@ -1,35 +1,48 @@
 package Shared;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Date;
 
 public class Animal {
     private int id;
     private double weight;
+    private String  dod;
+    private int farm;
 
-    public Animal(int id, double weight) {
+    public Animal() {
+
+    }
+
+    public Animal(int id, double weight, String  dod, int farm) {
         this.id = id;
         this.weight = weight;
+        this.dod = dod;
+        this.farm = farm;
     }
+
+    public Animal(double weight, String  dod, int farm) {
+        this.weight = weight;
+        this.dod = dod;
+        this.farm = farm;
+    }
+
+    public String  getDod() {
+        return dod;
+    }
+
+    public int getFarm() {
+        return farm;
+    }
+
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public String toString(){
+        return id+" "+weight+" "+dod+" "+farm;
     }
-
-    public String getString(){
-        return "Animal "+ "--> Id: "+id+" Weight: "+weight;
-    }
-
 }

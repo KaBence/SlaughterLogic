@@ -3,9 +3,21 @@ option java_multiple_files = true;
 
 package slaughter;
 
+
+
 message DTOAnimal{
   int32 id = 1;
   double weight = 2;
+  string dod = 3;
+  int32 farm = 4;
+}
+
+message GetAnimalReq{
+  int32 id = 1;
+}
+
+message GetAnimalRes{
+  repeated DTOAnimal ominous=1;
 }
 
 message GetAnimalsReq{
@@ -26,8 +38,10 @@ message PutAnimalRes{
 
 
 message DTOAnimalPart{
-  string name = 1;
-  int32 animalId = 2;
+  int32 id = 1;
+  string name = 2;
+  double weight = 3;
+  int32 animalId = 4;
 }
 
 
@@ -48,6 +62,8 @@ message PutAnimalPartRes{
 }
 
 service SlaughterService{
+  rpc getAnimal(GetAnimalReq) returns (GetAnimalRes);
+
   rpc getAnimals(GetAnimalsReq) returns (GetAnimalsRes);
 
   rpc putAnimal(PutAnimalReq) returns (PutAnimalRes);

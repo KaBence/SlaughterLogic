@@ -4,28 +4,33 @@ import Shared.Animal;
 import Shared.AnimalPart;
 import slaughter.*;
 
+import java.util.Date;
+
 public class DTOFactory {
+
 
     public static DTOAnimal createDTOAnimal(Animal animal){
         return DTOAnimal.newBuilder()
-                .setId(animal.getId())
+                .setDod(animal.getDod())
                 .setWeight(animal.getWeight())
+                .setFarm(animal.getFarm())
                 .build();
     }
 
     public static Animal createAnimal(DTOAnimal dto){
-        return new Animal(dto.getId(), dto.getWeight());
+        return new Animal(dto.getId(),dto.getWeight(), dto.getDod(),dto.getFarm());
     }
 
     public static DTOAnimalPart createDTOAnimalPart(AnimalPart animalPart){
         return DTOAnimalPart.newBuilder()
                 .setAnimalId(animalPart.getAnimalId())
+                .setWeight(animalPart.getWeight())
                 .setName(animalPart.getName())
                 .build();
     }
 
     public static AnimalPart createAnimalPart(DTOAnimalPart dto){
-        return new AnimalPart(dto.getName(), dto.getAnimalId());
+        return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId());
     }
 
     public static GetAnimalsReq createGetAnimalsReq(){
