@@ -5,7 +5,6 @@ public class HalfAnimalPackage {
 
     public HalfAnimalPackage()
     {
-
     }
 
     public HalfAnimalPackage(int half_package_id) {
