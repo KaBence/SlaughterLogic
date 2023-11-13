@@ -17,7 +17,7 @@ message GetAnimalReq{
 }
 
 message GetAnimalRes{
-  repeated DTOAnimal ominous=1;
+  DTOAnimal ominous=1;
 }
 
 message GetAnimalsReq{

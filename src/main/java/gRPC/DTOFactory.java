@@ -37,6 +37,11 @@ public class DTOFactory {
         return GetAnimalsReq.newBuilder().build();
     }
 
+    public static GetAnimalReq createGetAnimalReq(int id)
+    {
+        return GetAnimalReq.newBuilder().setId(id).build();
+    }
+
     public static GetAnimalPartsReq createGetAnimalPartsReq(){
         return GetAnimalPartsReq.newBuilder().build();
     }

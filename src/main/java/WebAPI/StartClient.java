@@ -27,7 +27,8 @@ public class StartClient {
             System.out.println("2 --> Insert AnimalPart");
             System.out.println("3 --> Get all Animals");
             System.out.println("4 --> Get all AnimalParts");
-            System.out.println("5 --> Shut channel");
+            System.out.println("5 --> Get Animal");
+            System.out.println("6 --> Shut channel");
             System.out.println("-------------");
             Scanner scanner=new Scanner(System.in);
             int choice= scanner.nextInt();
@@ -82,6 +83,16 @@ public class StartClient {
                     }
                     break;
                 case 5:
+                    System.out.print("ID: ");
+                    int id = scanner.nextInt();
+                    try {
+                        ResponseEntity<Animal> response = rest.getForEntity(URL +"animal/" + id,Animal.class);
+                        System.out.println(response.getBody());
+                    }catch( HttpClientErrorException ex ) {
+                        System.out.println( "*** Something went wrong in fetchAllFriends ***" );
+                    }
+                    break;
+                case 6:
                     flag = false;
                     System.out.println("Fuck you");
                     System.out.println("╭∩╮（︶_︶）╭∩╮");

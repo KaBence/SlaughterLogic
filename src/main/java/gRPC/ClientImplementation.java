@@ -19,7 +19,11 @@ public class ClientImplementation {
     }
 
     public Animal getAnimal(int id){
-        return null;
+
+        GetAnimalReq req = DTOFactory.createGetAnimalReq(id);
+        GetAnimalRes res = slaughterStub.getAnimal(req);
+
+        return DTOFactory.createAnimal(res.getOminous());
     }
 
     public Animal[] getAnimals(){
