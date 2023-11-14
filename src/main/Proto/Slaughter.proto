@@ -4,7 +4,6 @@ option java_multiple_files = true;
 package slaughter;
 
 
-
 message DTOAnimal{
   int32 id = 1;
   double weight = 2;
@@ -17,7 +16,7 @@ message GetAnimalReq{
 }
 
 message GetAnimalRes{
-  DTOAnimal ominous=1;
+  repeated DTOAnimal ominous=1;
 }
 
 message GetAnimalsReq{
@@ -43,6 +42,8 @@ message DTOAnimalPart{
   double weight = 3;
   int32 animalId = 4;
   int32 trayId= 5;
+  int32 onePackageId=6;
+  int32 halfAnAnimalPackageId=7;
 }
 
 
@@ -62,32 +63,6 @@ message PutAnimalPartRes{
   string resp=1;
 }
 
-message DTOTray{
-  int32 id=1;
-  double maxWeight=2;
-  int32 oneKindPackage=3;
-  int32 halfAnAnimalPackage=4;
-
-}
-message GetTrayReq{  int32 id = 1;}
-
-message GetTrayRes{
-  repeated DTOTray ominous=1;
-
-}
-message PutTrayReq{
-  DTOTray ominous=1;
-}
-message PutTrayRes{
-  string resp=1;
-}
-message GetTraysReq{
-
-}
-
-message GetTraysRes{
-  repeated DTOTray ominous=1;
-}
 
 message DTOHalfAnimalPackage{
   int32 id = 1;
@@ -119,6 +94,43 @@ message PutHalfAnimalPackageRes{
 
 
 
+message DTOTray{
+  int32 id=1;
+  double maxWeight=2;
+
+
+}
+message GetTrayReq{
+  int32 id = 1;
+}
+
+message GetTrayRes{
+  repeated DTOTray ominous=1;
+
+}
+message PutTrayReq{
+  DTOTray ominous=1;
+  DTOAnimalPart animalPart=2;
+}
+message PutTrayRes{
+  string resp=1;
+}
+message GetTraysReq{
+
+}
+
+message GetTraysRes{
+  repeated DTOTray ominous=1;
+}
+
+message GetStuffForPackageReq{
+  int32 trayId= 1;
+  int32 animalPartId= 2;
+  int32 packageId= 3;
+}
+message GetStuffForPackageRes{
+  string resp = 1;
+}
 service SlaughterService{
   rpc getAnimal(GetAnimalReq) returns (GetAnimalRes);
 
@@ -129,79 +141,14 @@ service SlaughterService{
   rpc getAnimalParts(GetAnimalPartsReq) returns (GetAnimalPartsRes);
 
   rpc putAnimalPart(PutAnimalPartReq) returns (PutAnimalPartRes);
-  rpc getTray(GetTrayReq) returns(GetTrayRes);
-  rpc putTray(PutTrayReq) returns(PutTrayRes);
-  rpc getTrays(GetTraysReq) returns(GetTraysRes);
-/*message DTOAnimal{
-  int32 id = 1;
-  double weight = 2;
-  string dod = 3;
-  int32 farm = 4;
-}
-
-message GetAnimalReq{
-  int32 id = 1;
-}
-
-message GetAnimalRes{
-  repeated DTOAnimal ominous=1;
-}
-
-message GetAnimalsReq{
-
-}
-
-message GetAnimalsRes{
-  repeated DTOAnimal ominous=1;
-}
-
-message PutAnimalReq{
-  DTOAnimal ominous=1;
-}
-
-message PutAnimalRes{
-  string resp=1;
-}
-
-
-message DTOAnimalPart{
-  int32 id = 1;
-  string name = 2;
-  double weight = 3;
-  int32 animalId = 4;
-}
-
-
-message GetAnimalPartsReq{
-
-}
-
-message GetAnimalPartsRes{
-  repeated DTOAnimalPart ominous=1;
-}
-
-message PutAnimalPartReq{
-  DTOAnimalPart ominous=1;
-}
-
-message PutAnimalPartRes{
-  string resp=1;
-}
-
-service SlaughterService{
-  rpc getAnimal(GetAnimalReq) returns (GetAnimalRes);
-
-  rpc getAnimals(GetAnimalsReq) returns (GetAnimalsRes);
-
-  rpc putAnimal(PutAnimalReq) returns (PutAnimalRes);
-
-  rpc getAnimalParts(GetAnimalPartsReq) returns (GetAnimalPartsRes);
-
-  rpc putAnimalPart(PutAnimalPartReq) returns (PutAnimalPartRes);*/
-
-
+  rpc getStuffForPackages(GetStuffForPackageReq) returns(GetStuffForPackageRes);
   rpc getHalfAnimalPackage(GetHalfAnimalPackageReq) returns (GetHalfAnimalPackageRes);
   rpc getHalfAnimalPackages(GetHalfAnimalPackagesReq) returns (GetHalfAnimalPackagesRes);
   rpc putHalfAnimalPackage(PutHalfAnimalPackageReq) returns (PutHalfAnimalPackageRes);
+
+  rpc getTray(GetTrayReq) returns(GetTrayRes);
+  rpc putTray(PutTrayReq) returns(PutTrayRes);
+  rpc getTrays(GetTraysReq) returns(GetTraysRes);
+}
 
 }
