@@ -1,9 +1,6 @@
 package gRPC;
 
-import Shared.Animal;
-import Shared.AnimalPart;
-import Shared.HalfAnimalPackage;
-import Shared.OneKindAnimalPackage;
+import Shared.*;
 import gRPC.DAO.OneKindAnimalPackageDao;
 import slaughter.*;
 
@@ -24,6 +21,9 @@ public class DTOFactory {
     public static Animal createAnimal(DTOAnimal dto){
         return new Animal(dto.getId(),dto.getWeight(), dto.getDod(),dto.getFarm(), dto.getCont());
     }
+    public static Tray createTray(DTOTray dto){
+        return new Tray(dto.getId(), dto.getMaxWeight());
+    }
 
     public static DTOAnimalPart createDTOAnimalPart(AnimalPart animalPart){
         return DTOAnimalPart.newBuilder()
@@ -34,7 +34,7 @@ public class DTOFactory {
     }
 
     public static AnimalPart createAnimalPart(DTOAnimalPart dto){
-        return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId(),dto.getCont());
+        return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId(), dto.getCont());
     }
 
     public static DTOHalfAnimalPackage createDTOHalfAnimalPackage(HalfAnimalPackage x)
@@ -66,6 +66,9 @@ public class DTOFactory {
         return GetAnimalsReq.newBuilder().build();
     }
 
+public  static GetTraysReq createGetTraysReq(){
+        return GetTraysReq.newBuilder().build();
+}
     public static GetAnimalReq createGetAnimalReq(int id)
     {
         return GetAnimalReq.newBuilder().setId(id).build();

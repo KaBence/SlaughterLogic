@@ -1,13 +1,7 @@
 package gRPC;
 
-import Shared.Animal;
-import Shared.AnimalPart;
-import Shared.HalfAnimalPackage;
-import Shared.OneKindAnimalPackage;
-import gRPC.DAO.AnimalDao;
-import gRPC.DAO.AnimalPartDao;
-import gRPC.DAO.HalfAnimalPackageDao;
-import gRPC.DAO.OneKindAnimalPackageDao;
+import Shared.*;
+import gRPC.DAO.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import slaughter.*;
@@ -15,7 +9,7 @@ import slaughter.*;
 import java.sql.Array;
 import java.util.ArrayList;
 
-public class ClientImplementation implements AnimalDao, AnimalPartDao, HalfAnimalPackageDao, OneKindAnimalPackageDao {
+public class ClientImplementation implements AnimalDao, AnimalPartDao, HalfAnimalPackageDao, OneKindAnimalPackageDao, TrayDao {
     private ManagedChannel managedChannel;
 
     private SlaughterServiceGrpc.SlaughterServiceBlockingStub slaughterStub;
@@ -148,5 +142,39 @@ public class ClientImplementation implements AnimalDao, AnimalPartDao, HalfAnima
 
     public void shutdown(){
         managedChannel.shutdown();
+    }
+
+    @Override
+    public Tray getTray(int id) {
+    return null;
+    }
+
+    @Override
+    public String putIntoTray(AnimalPart animalPart, int trayId) {
+        return null;
+    }
+
+    @Override
+    public String takeFromTray(int trayId, int animalpartId, int packageId) {
+        return null;
+    }
+
+    @Override
+    public Tray[] getAllTrays() {
+
+        GetTraysReq req=DTOFactory.createGetTraysReq();
+        GetTraysRes res=slaughterStub.getTrays(req);
+        Tray[] temp=new Tray[res.getOminousList().size()];
+        int counter=0;
+        for (DTOTray item:res.getOminousList()){
+            temp[counter]=DTOFactory.createTray(item);
+            counter++;
+        }
+        return temp;
+    }
+
+    @Override
+    public AnimalPart[] getAllAnimalPartsFromTheTray(int id) {
+        return new AnimalPart[0];
     }
 }

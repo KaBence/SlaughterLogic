@@ -1,15 +1,9 @@
 package WebAPI;
 
-import Shared.Animal;
-import Shared.AnimalPart;
-import Shared.HalfAnimalPackage;
-import Shared.OneKindAnimalPackage;
+import Shared.*;
 import com.google.api.Http;
 import gRPC.ClientImplementation;
-import gRPC.DAO.AnimalDao;
-import gRPC.DAO.AnimalPartDao;
-import gRPC.DAO.HalfAnimalPackageDao;
-import gRPC.DAO.OneKindAnimalPackageDao;
+import gRPC.DAO.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +13,7 @@ import java.util.ArrayList;
 @RestController
 public class SlaughterController {
     private ClientImplementation client;
-    private AnimalDao animalDao;
-    private AnimalPartDao animalPartDao;
-    private HalfAnimalPackageDao halfAnimalPackageDao;
-    private OneKindAnimalPackageDao oneKindAnimalPackageDao;
+
 
     public SlaughterController() {
         client=new ClientImplementation();
@@ -32,6 +23,11 @@ public class SlaughterController {
     public synchronized ResponseEntity<Animal[]> getAllAnimals(){
         Animal[] allAnimals=client.getAnimals();
         return new ResponseEntity<Animal[]>(allAnimals, HttpStatus.OK);
+    }
+    @GetMapping("tray")
+    public synchronized ResponseEntity<Tray[]> getAllTrays(){
+        Tray[] trays= client.getAllTrays();
+        return new ResponseEntity<Tray[]>(trays, HttpStatus.OK);
     }
 
     @GetMapping("animal/{id}")
@@ -111,5 +107,6 @@ public class SlaughterController {
         Animal[] animals=client.getContaminatedAnimals();
         return new ResponseEntity<Animal[]>(animals,HttpStatus.OK);
     }
+    //here in the endpoints I am caling the client methods
 
 }
