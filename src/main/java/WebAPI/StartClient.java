@@ -2,6 +2,7 @@ package WebAPI;
 
 import Shared.Animal;
 import Shared.AnimalPart;
+import Shared.HalfAnimalPackage;
 import gRPC.ClientImplementation;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,11 @@ public class StartClient {
             System.out.println("2 --> Insert AnimalPart");
             System.out.println("3 --> Get all Animals");
             System.out.println("4 --> Get all AnimalParts");
-            System.out.println("5 --> Shut channel");
+            System.out.println("5 --> Get Animal");
+            System.out.println("6 --> Insert HalfAnimalPackage");
+            System.out.println("7 --> Get all HalfAnimalPackages");
+            System.out.println("8 --> Get HalfAnimalPackage");
+            System.out.println("9 --> Shut channel");
             System.out.println("-------------");
             Scanner scanner=new Scanner(System.in);
             int choice= scanner.nextInt();
@@ -82,6 +87,46 @@ public class StartClient {
                     }
                     break;
                 case 5:
+                    System.out.print("ID: ");
+                    int animal_id = scanner.nextInt();
+                    try {
+                        ResponseEntity<Animal> response = rest.getForEntity(URL +"animal/" + animal_id,Animal.class);
+                        System.out.println(response.getBody());
+                    }catch( HttpClientErrorException ex ) {
+                        System.out.println( "*** Something went wrong in fetchAllFriends ***" );
+                    }
+                    break;
+                case 6:
+                    System.out.print("Half package ID : ");
+                    int halfPackageId=scanner.nextInt();
+                    HalfAnimalPackage z=new HalfAnimalPackage(halfPackageId);
+                    try {
+                        rest.put( URL + "halfanimalpackage/" + z.getHalf_package_id(), z);
+                    } catch( HttpClientErrorException ex ) {
+                        System.out.println( "*** OOPS - put failed with code " + ex.getStatusCode().value() + " ***" );
+                    }
+                    break;
+                case 7:
+                    try {
+                        ResponseEntity<HalfAnimalPackage[]> response = rest.getForEntity(URL + "halfanimalpackages", HalfAnimalPackage[].class);
+                        for(HalfAnimalPackage item: response.getBody()){
+                            System.out.println(item);
+                        }
+                    } catch( HttpClientErrorException ex ) {
+                        System.out.println( "*** Something went wrong in Getting animals ***" );
+                    }
+                    break;
+                case 8:
+                    System.out.print("ID: ");
+                    int halfPackade_id = scanner.nextInt();
+                    try {
+                        ResponseEntity<HalfAnimalPackage> response = rest.getForEntity(URL +"halfanimalpackage/" + halfPackade_id,HalfAnimalPackage.class);
+                        System.out.println(response.getBody());
+                    }catch( HttpClientErrorException ex ) {
+                        System.out.println( "*** Something went wrong in fetchAllFriends ***" );
+                    }
+                    break;
+                case 9:
                     flag = false;
                     System.out.println("Fuck you");
                     System.out.println("╭∩╮（︶_︶）╭∩╮");

@@ -2,6 +2,7 @@ package gRPC;
 
 import Shared.Animal;
 import Shared.AnimalPart;
+import Shared.HalfAnimalPackage;
 import slaughter.*;
 
 import java.util.Date;
@@ -34,12 +35,39 @@ public class DTOFactory {
         return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId());
     }
 
+    public static DTOHalfAnimalPackage createDTOHalfAnimalPackage(HalfAnimalPackage x)
+    {
+        return DTOHalfAnimalPackage.newBuilder()
+                .setId(x.getHalf_package_id())
+                .build();
+    }
+
+    public static HalfAnimalPackage createHalfAnimalPackage(DTOHalfAnimalPackage dto)
+    {
+        return new HalfAnimalPackage(dto.getId());
+    }
+
     public static GetAnimalsReq createGetAnimalsReq(){
         return GetAnimalsReq.newBuilder().build();
     }
 
+    public static GetAnimalReq createGetAnimalReq(int id)
+    {
+        return GetAnimalReq.newBuilder().setId(id).build();
+    }
+
     public static GetAnimalPartsReq createGetAnimalPartsReq(){
         return GetAnimalPartsReq.newBuilder().build();
+    }
+
+    public static GetHalfAnimalPackagesReq creteGetHalfAnimalPackagesReq()
+    {
+        return GetHalfAnimalPackagesReq.newBuilder().build();
+    }
+
+    public static GetHalfAnimalPackageReq creteGetHalfAnimalPackageReq(int x)
+    {
+        return GetHalfAnimalPackageReq.newBuilder().setId(x).build();
     }
 
     public static PutAnimalReq createPutAnimalReq(Animal animal){
@@ -48,9 +76,18 @@ public class DTOFactory {
                 .build();
     }
 
+
     public static PutAnimalPartReq createPutAnimalPartReq(AnimalPart animalPart){
         return PutAnimalPartReq.newBuilder()
                 .setOminous(DTOFactory.createDTOAnimalPart(animalPart))
                 .build();
     }
+
+    public static PutHalfAnimalPackageReq createPutHalfAnimalPackageReq(HalfAnimalPackage halfAnimalPackage)
+    {
+        return PutHalfAnimalPackageReq.newBuilder()
+                .setOminous(createDTOHalfAnimalPackage(halfAnimalPackage))
+                .build();
+    }
+
 }

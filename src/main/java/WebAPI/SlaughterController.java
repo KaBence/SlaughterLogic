@@ -2,6 +2,7 @@ package WebAPI;
 
 import Shared.Animal;
 import Shared.AnimalPart;
+import Shared.HalfAnimalPackage;
 import com.google.api.Http;
 import gRPC.ClientImplementation;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,26 @@ public class SlaughterController {
     @PutMapping("animalpart/{id}")
     public synchronized ResponseEntity<String> putAnimalPart(@RequestBody AnimalPart animal, @PathVariable(value = "id")int id){
         String  x=client.insertAnimalPart(animal);
+        return new ResponseEntity<>(x,HttpStatus.CREATED);
+    }
+
+    @GetMapping("halfanimalpackages")
+    public synchronized ResponseEntity<HalfAnimalPackage[]> getAllHalfAnimalPackages(){
+        HalfAnimalPackage[] all=client.getHalfAnimalPackages();
+        return new ResponseEntity<HalfAnimalPackage[]>(all, HttpStatus.OK);
+    }
+
+    @GetMapping("halfanimalpackage/{id}")
+    public synchronized ResponseEntity<HalfAnimalPackage> getHalfAnimalPackage(@PathVariable(value = "id") int id){
+        HalfAnimalPackage x=client.getHalfAnimalPackage(id);
+        if( x == null )
+            return new ResponseEntity<HalfAnimalPackage>( HttpStatus.NOT_FOUND );
+        return new ResponseEntity<HalfAnimalPackage>(x,HttpStatus.OK);
+    }
+
+    @PutMapping("halfanimalpackage/{id}")
+    public synchronized ResponseEntity<String> putHalfAnimalPackage(@RequestBody HalfAnimalPackage halfAnimalPackage, @PathVariable(value = "id")int id){
+        String  x=client.insertHalfAnimalPackage(halfAnimalPackage);
         return new ResponseEntity<>(x,HttpStatus.CREATED);
     }
 }

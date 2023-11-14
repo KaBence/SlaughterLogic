@@ -2,6 +2,7 @@ package gRPC;
 
 import Shared.Animal;
 import Shared.AnimalPart;
+import Shared.HalfAnimalPackage;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import slaughter.*;
@@ -19,7 +20,11 @@ public class ClientImplementation {
     }
 
     public Animal getAnimal(int id){
-        return null;
+
+        GetAnimalReq req = DTOFactory.createGetAnimalReq(id);
+        GetAnimalRes res = slaughterStub.getAnimal(req);
+
+        return DTOFactory.createAnimal(res.getOminous());
     }
 
     public Animal[] getAnimals(){
@@ -46,6 +51,26 @@ public class ClientImplementation {
         return temp;
     }
 
+    public HalfAnimalPackage getHalfAnimalPackage(int id){
+        GetHalfAnimalPackageReq req = DTOFactory.creteGetHalfAnimalPackageReq(id);
+        GetHalfAnimalPackageRes res = slaughterStub.getHalfAnimalPackage(req);
+
+        return DTOFactory.createHalfAnimalPackage(res.getOminous());
+    }
+
+    public HalfAnimalPackage[] getHalfAnimalPackages(){
+        GetHalfAnimalPackagesReq req = DTOFactory.creteGetHalfAnimalPackagesReq();
+        GetHalfAnimalPackagesRes res = slaughterStub.getHalfAnimalPackages(req);
+
+        HalfAnimalPackage[] temp=new HalfAnimalPackage[res.getOminousCount()];
+        int counter=0;
+        for (DTOHalfAnimalPackage item:res.getOminousList()){
+            temp[counter]=DTOFactory.createHalfAnimalPackage(item);
+            counter++;
+        }
+        return temp;
+    }
+
     public String  insertAnimal(Animal animal){
         PutAnimalReq req=DTOFactory.createPutAnimalReq(animal);
         PutAnimalRes res=slaughterStub.putAnimal(req);
@@ -56,6 +81,13 @@ public class ClientImplementation {
         PutAnimalPartReq req=DTOFactory.createPutAnimalPartReq(animalPart);
         PutAnimalPartRes res=slaughterStub.putAnimalPart(req);
         return res.getResp();
+    }
+
+    public String insertHalfAnimalPackage(HalfAnimalPackage x)
+    {
+     PutHalfAnimalPackageReq req = DTOFactory.createPutHalfAnimalPackageReq(x);
+     PutHalfAnimalPackageRes res = slaughterStub.putHalfAnimalPackage(req);
+     return  res.getResp();
     }
 
 
