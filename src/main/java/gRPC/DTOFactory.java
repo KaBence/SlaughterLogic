@@ -3,6 +3,8 @@ package gRPC;
 import Shared.Animal;
 import Shared.AnimalPart;
 import Shared.HalfAnimalPackage;
+import Shared.OneKindAnimalPackage;
+import gRPC.DAO.OneKindAnimalPackageDao;
 import slaughter.*;
 
 import java.util.Date;
@@ -20,7 +22,7 @@ public class DTOFactory {
     }
 
     public static Animal createAnimal(DTOAnimal dto){
-        return new Animal(dto.getId(),dto.getWeight(), dto.getDod(),dto.getFarm());
+        return new Animal(dto.getId(),dto.getWeight(), dto.getDod(),dto.getFarm(), dto.getCont());
     }
 
     public static DTOAnimalPart createDTOAnimalPart(AnimalPart animalPart){
@@ -32,7 +34,7 @@ public class DTOFactory {
     }
 
     public static AnimalPart createAnimalPart(DTOAnimalPart dto){
-        return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId());
+        return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId(),dto.getCont());
     }
 
     public static DTOHalfAnimalPackage createDTOHalfAnimalPackage(HalfAnimalPackage x)
@@ -45,6 +47,19 @@ public class DTOFactory {
     public static HalfAnimalPackage createHalfAnimalPackage(DTOHalfAnimalPackage dto)
     {
         return new HalfAnimalPackage(dto.getId());
+    }
+
+    public static DTOOneKindAnimalPackage createDTOOneKindAnimalPackage(OneKindAnimalPackage x)
+    {
+        return DTOOneKindAnimalPackage.newBuilder()
+                .setId(x.getOne_package_id())
+                .setType(x.getPartType())
+                .build();
+    }
+
+    public static OneKindAnimalPackage createOneKindAnimalPackage(DTOOneKindAnimalPackage dto)
+    {
+        return new OneKindAnimalPackage(dto.getId(),dto.getType());
     }
 
     public static GetAnimalsReq createGetAnimalsReq(){
@@ -88,6 +103,33 @@ public class DTOFactory {
         return PutHalfAnimalPackageReq.newBuilder()
                 .setOminous(createDTOHalfAnimalPackage(halfAnimalPackage))
                 .build();
+    }
+
+
+    public static GetOneKindAnimalPackagesReq creteGetOneKindAnimalPackagesReq()
+    {
+        return GetOneKindAnimalPackagesReq.newBuilder().build();
+    }
+
+    public static GetOneKindAnimalPackageReq creteGetOneKindAnimalPackageReq(int x)
+    {
+        return GetOneKindAnimalPackageReq.newBuilder().setId(x).build();
+    }
+
+    public static PutOneKindAnimalPackageReq createPutOneKindAnimalPackageReq(OneKindAnimalPackage oneKindAnimalPackage)
+    {
+        return PutOneKindAnimalPackageReq.newBuilder()
+                .setOminous(createDTOOneKindAnimalPackage(oneKindAnimalPackage))
+                .build();
+    }
+    public static RecallReq createRecallReq(int id){
+        return RecallReq.newBuilder()
+                .setId(id)
+                .build();
+    }
+
+    public static GetContaminatedReq createGetContaminatedReq(){
+        return GetContaminatedReq.newBuilder().build();
     }
 
 }

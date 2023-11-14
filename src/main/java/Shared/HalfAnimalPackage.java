@@ -21,6 +21,6 @@ public class HalfAnimalPackage {
 
     public String toString()
     {
-        return "Package type: Half Animal Package; Id: "+half_package_id;
+        return "Package type: Half Animal Package; ID: "+half_package_id;
     }
 }
