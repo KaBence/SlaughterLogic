@@ -35,11 +35,10 @@ public class StartClient {
             System.out.println("8 --> Get HalfAnimalPackage");
             System.out.println("9 --> Recall Animal");
             System.out.println("10 --> Get recalled animals");
-            System.out.println("11 --> Shut channel");
-            System.out.println("9 --> Insert OneKindAnimalPackage");
-            System.out.println("10 --> Get all OneKindAnimalPackages");
-            System.out.println("11 --> Get OneKindAnimalPackage");
-            System.out.println("12 --> Shut channel");
+            System.out.println("11 --> Insert OneKindAnimalPackage");
+            System.out.println("12 --> Get all OneKindAnimalPackages");
+            System.out.println("13 --> Get OneKindAnimalPackage");
+            System.out.println("14 --> Shut channel");
             System.out.println("-------------");
             Scanner scanner=new Scanner(System.in);
             int choice= scanner.nextInt();
@@ -165,7 +164,7 @@ public class StartClient {
                         System.out.println( "*** OOPS - put failed with code " + ex.getStatusCode().value() + " ***" );
                     }
                     break;
-                case 10:
+                case 12:
                     try {
                         ResponseEntity<OneKindAnimalPackage[]> response = rest.getForEntity(URL + "onekindanimalpackages", OneKindAnimalPackage[].class);
                         for(OneKindAnimalPackage item: response.getBody()){
@@ -175,7 +174,7 @@ public class StartClient {
                         System.out.println( "*** Something went wrong in Getting animals ***" );
                     }
                     break;
-                case 11:
+                case 13:
                     System.out.print("ID: ");
                     int oneKindPackade_id = scanner.nextInt();
                     try {
@@ -185,7 +184,7 @@ public class StartClient {
                         System.out.println( "*** Something went wrong in fetchAllFriends ***" );
                     }
                     break;
-                case 12:
+                case 14:
                     flag = false;
                     System.out.println("Fuck you");
                     System.out.println("╭∩╮（︶_︶）╭∩╮");
