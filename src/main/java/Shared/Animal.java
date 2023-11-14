@@ -50,6 +50,6 @@ public class Animal {
     }
 
     public String toString(){
-        return id+" "+weight+" "+dod+" "+farm;
+        return id+" "+weight+" "+dod+" "+farm+" Contaminated: "+isContaminated();
     }
 }

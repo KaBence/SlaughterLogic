@@ -42,7 +42,11 @@ public class AnimalPart {
         return animalId;
     }
 
+    public boolean isContaminated() {
+        return contaminated;
+    }
+
     public String toString(){
-        return id+" "+name+" "+weight+" AnimalID ->" +animalId;
+        return id+" "+name+" "+weight+" AnimalID ->" +animalId+" Contaminated: "+isContaminated();
     }
 }
