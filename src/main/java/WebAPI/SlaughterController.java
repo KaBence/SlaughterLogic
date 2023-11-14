@@ -70,4 +70,17 @@ public class SlaughterController {
         String  x=client.insertHalfAnimalPackage(halfAnimalPackage);
         return new ResponseEntity<>(x,HttpStatus.CREATED);
     }
+
+    @PutMapping("recall/{id}")
+    public synchronized ResponseEntity<String> recallAnimalPart(@PathVariable(value="id")int id){
+        String x =client.recallAnimalPart(id);
+        return new ResponseEntity<>(x,HttpStatus.OK);
+    }
+
+    @GetMapping("animal/contaminated")
+    public synchronized ResponseEntity<Animal[]> getContaminatedAnimals(){
+        Animal[] animals=client.getContaminatedAnimals();
+        return new ResponseEntity<Animal[]>(animals,HttpStatus.OK);
+    }
+
 }

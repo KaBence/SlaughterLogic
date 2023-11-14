@@ -39,6 +39,18 @@ public class ClientImplementation {
         return temp;
     }
 
+    public Animal[] getContaminatedAnimals(){
+        GetContaminatedReq req=DTOFactory.createGetContaminatedReq();
+        GetContaminatedRes res=slaughterStub.getContaminated(req);
+        Animal[] temp=new Animal[res.getOminousList().size()];
+        int counter=0;
+        for (DTOAnimal item:res.getOminousList()){
+            temp[counter]=DTOFactory.createAnimal(item);
+            counter++;
+        }
+        return temp;
+    }
+
     public AnimalPart[] getAnimalParts(){
         GetAnimalPartsReq req=DTOFactory.createGetAnimalPartsReq();
         GetAnimalPartsRes res=slaughterStub.getAnimalParts(req);
@@ -88,6 +100,12 @@ public class ClientImplementation {
      PutHalfAnimalPackageReq req = DTOFactory.createPutHalfAnimalPackageReq(x);
      PutHalfAnimalPackageRes res = slaughterStub.putHalfAnimalPackage(req);
      return  res.getResp();
+    }
+
+    public String recallAnimalPart(int id){
+        RecallReq req=DTOFactory.createRecallReq(id);
+        RecallRes res=slaughterStub.recall(req);
+        return res.getRes();
     }
 
 

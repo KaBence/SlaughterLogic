@@ -32,7 +32,9 @@ public class StartClient {
             System.out.println("6 --> Insert HalfAnimalPackage");
             System.out.println("7 --> Get all HalfAnimalPackages");
             System.out.println("8 --> Get HalfAnimalPackage");
-            System.out.println("9 --> Shut channel");
+            System.out.println("9 --> Recall Animal");
+            System.out.println("10 --> Get recalled animals");
+            System.out.println("11 --> Shut channel");
             System.out.println("-------------");
             Scanner scanner=new Scanner(System.in);
             int choice= scanner.nextInt();
@@ -127,6 +129,26 @@ public class StartClient {
                     }
                     break;
                 case 9:
+                    System.out.print("Animal ID:");
+                    int badPart= scanner.nextInt();
+                    try {
+                        rest.put(URL + "recall/" + badPart,badPart);
+                    }
+                    catch (HttpClientErrorException ex){
+                        System.out.println("*** Something went wrong ***");
+                    }
+                    break;
+                case 10:
+                    try {
+                        ResponseEntity<Animal[]> response = rest.getForEntity(URL + "animal/contaminated", Animal[].class);
+                        for(Animal item: response.getBody()){
+                            System.out.println(item);
+                        }
+                    } catch( HttpClientErrorException ex ) {
+                        System.out.println( "*** Something went wrong in Getting animals ***" );
+                    }
+                    break;
+                case 11:
                     flag = false;
                     System.out.println("Fuck you");
                     System.out.println("╭∩╮（︶_︶）╭∩╮");

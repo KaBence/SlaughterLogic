@@ -19,7 +19,7 @@ public class DTOFactory {
     }
 
     public static Animal createAnimal(DTOAnimal dto){
-        return new Animal(dto.getId(),dto.getWeight(), dto.getDod(),dto.getFarm());
+        return new Animal(dto.getId(),dto.getWeight(), dto.getDod(),dto.getFarm(), dto.getCont());
     }
 
     public static DTOAnimalPart createDTOAnimalPart(AnimalPart animalPart){
@@ -31,7 +31,7 @@ public class DTOFactory {
     }
 
     public static AnimalPart createAnimalPart(DTOAnimalPart dto){
-        return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId());
+        return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId(),dto.getCont());
     }
 
     public static DTOHalfAnimalPackage createDTOHalfAnimalPackage(HalfAnimalPackage x)
@@ -87,6 +87,16 @@ public class DTOFactory {
         return PutHalfAnimalPackageReq.newBuilder()
                 .setOminous(createDTOHalfAnimalPackage(halfAnimalPackage))
                 .build();
+    }
+
+    public static RecallReq createRecallReq(int id){
+        return RecallReq.newBuilder()
+                .setId(id)
+                .build();
+    }
+
+    public static GetContaminatedReq createGetContaminatedReq(){
+        return GetContaminatedReq.newBuilder().build();
     }
 
 }
