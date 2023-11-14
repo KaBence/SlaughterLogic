@@ -98,6 +98,36 @@ message RecallReq{
 message RecallRes{
   string res=1;
 }
+message DTOOneKindAnimalPackage{
+  int32 id = 1;
+  string type = 2;
+}
+
+message GetOneKindAnimalPackageReq{
+  int32 id = 1;
+  string type = 2;
+}
+
+message GetOneKindAnimalPackageRes{
+  DTOOneKindAnimalPackage ominous = 1;
+}
+
+message GetOneKindAnimalPackagesReq{
+
+}
+
+message GetOneKindAnimalPackagesRes{
+  repeated DTOOneKindAnimalPackage ominous = 1;
+}
+
+message PutOneKindAnimalPackageReq{
+  DTOOneKindAnimalPackage ominous = 1;
+}
+
+message PutOneKindAnimalPackageRes{
+  string resp = 1;
+}
+
 
 message GetContaminatedReq{
 
@@ -108,19 +138,31 @@ message GetContaminatedRes{
 }
 
 service SlaughterService{
+  //Animal
   rpc getAnimal(GetAnimalReq) returns (GetAnimalRes);
 
   rpc getAnimals(GetAnimalsReq) returns (GetAnimalsRes);
 
   rpc putAnimal(PutAnimalReq) returns (PutAnimalRes);
 
+  //Animal Part
   rpc getAnimalParts(GetAnimalPartsReq) returns (GetAnimalPartsRes);
 
   rpc putAnimalPart(PutAnimalPartReq) returns (PutAnimalPartRes);
 
+  //Half Animal Package
   rpc getHalfAnimalPackage(GetHalfAnimalPackageReq) returns (GetHalfAnimalPackageRes);
+
   rpc getHalfAnimalPackages(GetHalfAnimalPackagesReq) returns (GetHalfAnimalPackagesRes);
+
   rpc putHalfAnimalPackage(PutHalfAnimalPackageReq) returns (PutHalfAnimalPackageRes);
+
+  //One Kind Animal Package
+  rpc getOneKindAnimalPackage(GetOneKindAnimalPackageReq) returns (GetOneKindAnimalPackageRes);
+
+  rpc getOneKindAnimalPackages(GetOneKindAnimalPackagesReq) returns (GetOneKindAnimalPackagesRes);
+
+  rpc putOneKindAnimalPackage(PutOneKindAnimalPackageReq) returns (PutOneKindAnimalPackageRes);
 
 
   rpc recall(RecallReq) returns (RecallRes);

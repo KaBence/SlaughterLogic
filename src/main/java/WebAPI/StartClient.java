@@ -3,6 +3,7 @@ package WebAPI;
 import Shared.Animal;
 import Shared.AnimalPart;
 import Shared.HalfAnimalPackage;
+import Shared.OneKindAnimalPackage;
 import gRPC.ClientImplementation;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,10 @@ public class StartClient {
             System.out.println("9 --> Recall Animal");
             System.out.println("10 --> Get recalled animals");
             System.out.println("11 --> Shut channel");
+            System.out.println("9 --> Insert OneKindAnimalPackage");
+            System.out.println("10 --> Get all OneKindAnimalPackages");
+            System.out.println("11 --> Get OneKindAnimalPackage");
+            System.out.println("12 --> Shut channel");
             System.out.println("-------------");
             Scanner scanner=new Scanner(System.in);
             int choice= scanner.nextInt();
@@ -149,6 +154,38 @@ public class StartClient {
                     }
                     break;
                 case 11:
+                    System.out.print("One Kind package ID : ");
+                    int oneKindPackageId=scanner.nextInt();
+                    System.out.print("Type: ");
+                    String type = scanner.next();
+                    OneKindAnimalPackage w=new OneKindAnimalPackage(oneKindPackageId, type);
+                    try {
+                        rest.put( URL + "onekindanimalpackage/" + w.getOne_package_id(), w);
+                    } catch( HttpClientErrorException ex ) {
+                        System.out.println( "*** OOPS - put failed with code " + ex.getStatusCode().value() + " ***" );
+                    }
+                    break;
+                case 10:
+                    try {
+                        ResponseEntity<OneKindAnimalPackage[]> response = rest.getForEntity(URL + "onekindanimalpackages", OneKindAnimalPackage[].class);
+                        for(OneKindAnimalPackage item: response.getBody()){
+                            System.out.println(item);
+                        }
+                    } catch( HttpClientErrorException ex ) {
+                        System.out.println( "*** Something went wrong in Getting animals ***" );
+                    }
+                    break;
+                case 11:
+                    System.out.print("ID: ");
+                    int oneKindPackade_id = scanner.nextInt();
+                    try {
+                        ResponseEntity<OneKindAnimalPackage> response = rest.getForEntity(URL +"onekindanimalpackage/" + oneKindPackade_id,OneKindAnimalPackage.class);
+                        System.out.println(response.getBody());
+                    }catch( HttpClientErrorException ex ) {
+                        System.out.println( "*** Something went wrong in fetchAllFriends ***" );
+                    }
+                    break;
+                case 12:
                     flag = false;
                     System.out.println("Fuck you");
                     System.out.println("╭∩╮（︶_︶）╭∩╮");
