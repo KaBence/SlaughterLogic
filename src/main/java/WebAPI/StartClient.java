@@ -184,8 +184,8 @@ public class StartClient {
 
     private void tray(){
         System.out.println("-------------");
-        System.out.println("1 --> ");
-        System.out.println("2 --> ");
+        System.out.println("1 -->Insert into tray ");
+        System.out.println("2 --> Get one tray");
         System.out.println("3 --> Get all trays");
         System.out.println("-------------");
         int choice= scanner.nextInt();
@@ -196,13 +196,20 @@ public class StartClient {
                 break;
             case 3:
                 try {
-                    ResponseEntity<Tray[]> response = rest.getForEntity(URL + "tray", Tray[].class);
+                    ResponseEntity<Tray[]> response = rest.getForEntity(URL +"tray", Tray[].class);
                     for(Tray item: response.getBody()){
                         System.out.println(item);
                     }
                 } catch( HttpClientErrorException ex ) {
                     System.out.println( "*** Something went wrong in Getting the trays ***" );
                 }
+                break;
+            default:
+                System.out.println("Wrong id");
+                System.out.println("You can't even type");
+                System.out.println("Fuck you");
+                System.out.println("╭∩╮（︶_︶）╭∩╮");
+                System.out.println("Start one more time from the begging");
                 break;
         }
     }

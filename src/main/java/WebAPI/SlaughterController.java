@@ -8,6 +8,7 @@ import gRPC.DTOFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import slaughter.DTOHalfAnimalPackage;
 import slaughter.GetHalfAnimalPackagesReq;
 import slaughter.GetHalfAnimalPackagesRes;

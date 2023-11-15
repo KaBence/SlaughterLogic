@@ -129,8 +129,7 @@ message PutOneKindAnimalPackageRes{
 message DTOTray{
   int32 id=1;
   double maxWeight=2;
-  int32 oneKindPackage=3;
-  int32 halfAnAnimalPackage=4;
+
 
 }
 message GetTrayReq{

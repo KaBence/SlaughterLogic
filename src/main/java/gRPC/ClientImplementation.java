@@ -164,7 +164,7 @@ public class ClientImplementation implements AnimalDao, AnimalPartDao, HalfAnima
 
         GetTraysReq req=DTOFactory.createGetTraysReq();
         GetTraysRes res=slaughterStub.getTrays(req);
-        Tray[] temp=new Tray[res.getOminousCount()];
+        Tray[] temp=new Tray[res.getOminousList().size()];
         int counter=0;
         for (DTOTray item:res.getOminousList()){
             temp[counter]=DTOFactory.createTray(item);
