@@ -190,6 +190,10 @@ public class StartClient {
         System.out.println("-------------");
         int choice= scanner.nextInt();
         switch (choice){
+            case 1:
+                break;
+            case 2:
+                break;
             case 3:
                 try {
                     ResponseEntity<Tray[]> response = rest.getForEntity(URL + "tray", Tray[].class);

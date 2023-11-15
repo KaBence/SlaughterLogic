@@ -4,9 +4,13 @@ import Shared.*;
 import com.google.api.Http;
 import gRPC.ClientImplementation;
 import gRPC.DAO.*;
+import gRPC.DTOFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import slaughter.DTOHalfAnimalPackage;
+import slaughter.GetHalfAnimalPackagesReq;
+import slaughter.GetHalfAnimalPackagesRes;
 
 import java.util.ArrayList;
 
