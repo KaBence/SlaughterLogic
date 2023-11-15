@@ -193,6 +193,14 @@ public class StartClient {
             case 1:
                 break;
             case 2:
+                System.out.print("ID: ");
+                int tray_id = scanner.nextInt();
+                try {
+                    ResponseEntity<Tray> response = rest.getForEntity(URL +"tray/" + tray_id,Tray.class);
+                    System.out.println(response.getBody());
+                }catch( HttpClientErrorException ex ) {
+                    System.out.println( "*** Something went wrong in get a tray ***" );
+                }
                 break;
             case 3:
                 try {

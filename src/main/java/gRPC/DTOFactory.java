@@ -118,6 +118,9 @@ public  static GetTraysReq createGetTraysReq(){
     {
         return GetOneKindAnimalPackageReq.newBuilder().setId(x).build();
     }
+    public static GetTrayReq createGetTrayReq(int x){
+        return GetTrayReq.newBuilder().setId(x).build();
+    }
 
     public static PutOneKindAnimalPackageReq createPutOneKindAnimalPackageReq(OneKindAnimalPackage oneKindAnimalPackage)
     {

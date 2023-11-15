@@ -34,6 +34,13 @@ public class SlaughterController {
         Tray[] trays= client.getAllTrays();
         return new ResponseEntity<Tray[]>(trays, HttpStatus.OK);
     }
+    @GetMapping("tray/{id}")
+    public synchronized ResponseEntity<Tray> getTray(@PathVariable(value = "id") int id){
+    Tray x= client.getTray(id);
+    if(x==null)
+        return new ResponseEntity<Tray>(HttpStatus.NOT_FOUND);
+    return new ResponseEntity<Tray>(x,HttpStatus.OK);
+    }
 
     @GetMapping("animal/{id}")
     public synchronized ResponseEntity<Animal> getAnimal(@PathVariable(value = "id") int id){
@@ -54,7 +61,8 @@ public class SlaughterController {
         String  x=client.insertAnimal(animal);
         return new ResponseEntity<>(x,HttpStatus.CREATED);
     }
-
+@PutMapping("tray{id}")
+public synchronized ResponseEntity<String>
     @PutMapping("animalpart/{id}")
     public synchronized ResponseEntity<String> putAnimalPart(@RequestBody AnimalPart animal, @PathVariable(value = "id")int id){
         String  x=client.insertAnimalPart(animal);

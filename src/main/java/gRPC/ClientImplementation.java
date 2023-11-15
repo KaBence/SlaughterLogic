@@ -111,13 +111,7 @@ public class ClientImplementation implements AnimalDao, AnimalPartDao, HalfAnima
     }
 
 
-    @Override
-    public OneKindAnimalPackage getOneKindAnimalPackage(int id) {
-        GetOneKindAnimalPackageReq req = DTOFactory.creteGetOneKindAnimalPackageReq(id);
-        GetOneKindAnimalPackageRes res = slaughterStub.getOneKindAnimalPackage(req);
 
-        return DTOFactory.createOneKindAnimalPackage(res.getOminous());
-    }
 
     @Override
     public OneKindAnimalPackage[] getOneKindAnimalPackages() {
@@ -146,9 +140,17 @@ public class ClientImplementation implements AnimalDao, AnimalPartDao, HalfAnima
 
     @Override
     public Tray getTray(int id) {
-    return null;
+    GetTrayReq req= DTOFactory.createGetTrayReq(id);
+    GetTrayRes res= slaughterStub.getTray(req);
+    return DTOFactory.createTray(res.getOminous());
     }
+    @Override
+    public OneKindAnimalPackage getOneKindAnimalPackage(int id) {
+        GetOneKindAnimalPackageReq req = DTOFactory.creteGetOneKindAnimalPackageReq(id);
+        GetOneKindAnimalPackageRes res = slaughterStub.getOneKindAnimalPackage(req);
 
+        return DTOFactory.createOneKindAnimalPackage(res.getOminous());
+    }
     @Override
     public String putIntoTray(AnimalPart animalPart, int trayId) {
         return null;
