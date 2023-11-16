@@ -25,7 +25,16 @@ public class Tray {
     public int getId() {
         return id;
     }
-public String toString(){
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setMaxWeight(double maxWeight) {
+        this.maxWeight = maxWeight;
+    }
+
+    public String toString(){
         return "Tray id:" +getId() +" " +" Max weight: " + getMaxWeight();
 }
 }

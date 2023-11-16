@@ -61,8 +61,19 @@ public class SlaughterController {
         String  x=client.insertAnimal(animal);
         return new ResponseEntity<>(x,HttpStatus.CREATED);
     }
-@PutMapping("tray{id}")
-public synchronized ResponseEntity<String>
+
+    @PutMapping("tray/create")
+    public synchronized ResponseEntity<String> createTray(@RequestBody double maxWeight){
+        String x=client.createTray(maxWeight);
+        return new ResponseEntity<>(x,HttpStatus.CREATED);
+    }
+
+    @PutMapping("tray/{id}")
+    public synchronized ResponseEntity<String> putTray(@RequestBody PutTrayDTO dto, @PathVariable(value = "id")int id){
+        String x= client.putIntoTray(dto.getAnimalPartID(), dto.getTrayID());
+        return new ResponseEntity<>(x,HttpStatus.CREATED);
+}
+
     @PutMapping("animalpart/{id}")
     public synchronized ResponseEntity<String> putAnimalPart(@RequestBody AnimalPart animal, @PathVariable(value = "id")int id){
         String  x=client.insertAnimalPart(animal);

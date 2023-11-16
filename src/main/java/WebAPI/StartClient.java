@@ -8,6 +8,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.yaml.snakeyaml.reader.UnicodeReader;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -155,7 +156,10 @@ public class StartClient {
                 Double pWeight=scanner.nextDouble();
                 System.out.println("Name : ");
                 String name=scanner.next();
-                AnimalPart y=new AnimalPart(name,pWeight,animalId);
+                int tray=0;
+                int oneKindPackage=0;
+                int haldAnAnimalPackage=0;
+                AnimalPart y=new AnimalPart(name,pWeight,animalId, tray,oneKindPackage, haldAnAnimalPackage);
                 try {
                     rest.put( URL + "animalpart/" + y.getAnimalId(), y );
                 } catch( HttpClientErrorException ex ) {
@@ -187,10 +191,27 @@ public class StartClient {
         System.out.println("1 -->Insert into tray ");
         System.out.println("2 --> Get one tray");
         System.out.println("3 --> Get all trays");
+        System.out.println("4 --> Create Tray");
         System.out.println("-------------");
         int choice= scanner.nextInt();
         switch (choice){
             case 1:
+                Tray tray= new Tray();
+                AnimalPart animalPart= new AnimalPart();
+                System.out.println("TRAY ID:");
+                int trayId= scanner.nextInt();
+                tray.setId(trayId);
+
+                System.out.println("Animal part ID:");
+                int animalPartId= scanner.nextInt();
+         animalPart.setTrayId(trayId);
+
+                try {
+                    //modify this part to make it work
+                    rest.put( URL + "tray/" + trayId, new PutTrayDTO(trayId,animalPartId));
+                } catch( HttpClientErrorException ex ) {
+                    System.out.println( "*** OOPS - put failed with code " + ex.getStatusCode().value() + " ***" );
+                }
                 break;
             case 2:
                 System.out.print("ID: ");
@@ -210,6 +231,17 @@ public class StartClient {
                     }
                 } catch( HttpClientErrorException ex ) {
                     System.out.println( "*** Something went wrong in Getting the trays ***" );
+                }
+                break;
+            case 4:
+                try{
+                    System.out.print("Max Weight: ");
+                    double weight=scanner.nextDouble();
+                    rest.put(URL+"tray/create",weight);
+
+                }
+                catch (HttpClientErrorException ex){
+                    System.out.println("*** Something went wrong o7 ***");
                 }
                 break;
             default:

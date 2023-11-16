@@ -139,6 +139,15 @@ public class ClientImplementation implements AnimalDao, AnimalPartDao, HalfAnima
     }
 
     @Override
+    public String createTray(double maxWeight) {
+        CreateTrayReq req=CreateTrayReq.newBuilder()
+                .setMaxWeight(maxWeight)
+                .build();
+        CreateTrayRes res=slaughterStub.createTray(req);
+        return res.getResp();
+    }
+
+    @Override
     public Tray getTray(int id) {
     GetTrayReq req= DTOFactory.createGetTrayReq(id);
     GetTrayRes res= slaughterStub.getTray(req);
@@ -152,8 +161,10 @@ public class ClientImplementation implements AnimalDao, AnimalPartDao, HalfAnima
         return DTOFactory.createOneKindAnimalPackage(res.getOminous());
     }
     @Override
-    public String putIntoTray(AnimalPart animalPart, int trayId) {
-        return null;
+    public String putIntoTray(int animalPart, int trayId) {
+        PutTrayReq req= DTOFactory.createPutTrayReq(animalPart,trayId);
+        PutTrayRes res= slaughterStub.putTray(req);
+        return res.getResp();
     }
 
     @Override

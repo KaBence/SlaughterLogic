@@ -17,7 +17,12 @@ public class DTOFactory {
                 .setFarm(animal.getFarm())
                 .build();
     }
-
+public static DTOTray createDTOTray(AnimalPart animalPart, Tray tray){
+        return DTOTray.newBuilder()
+                .setId(tray.getId())
+                .setMaxWeight(tray.getMaxWeight())
+                .build();
+}
     public static Animal createAnimal(DTOAnimal dto){
         return new Animal(dto.getId(),dto.getWeight(), dto.getDod(),dto.getFarm(), dto.getCont());
     }
@@ -34,7 +39,7 @@ public class DTOFactory {
     }
 
     public static AnimalPart createAnimalPart(DTOAnimalPart dto){
-        return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId(), dto.getCont());
+        return new AnimalPart(dto.getId(),dto.getName(),dto.getWeight(),dto.getAnimalId(), dto.getTrayId(), dto.getOnePackageId(), dto.getHalfAnAnimalPackageId(), dto.getCont());
     }
 
     public static DTOHalfAnimalPackage createDTOHalfAnimalPackage(HalfAnimalPackage x)
@@ -93,6 +98,12 @@ public  static GetTraysReq createGetTraysReq(){
                 .setOminous(DTOFactory.createDTOAnimal(animal))
                 .build();
     }
+    public static PutTrayReq createPutTrayReq(int animalPart,int tray){
+        return PutTrayReq.newBuilder()
+                .setOminous(tray)
+                .setAnimalPart(animalPart)
+                .build();
+    }
 
 
     public static PutAnimalPartReq createPutAnimalPartReq(AnimalPart animalPart){
@@ -118,6 +129,7 @@ public  static GetTraysReq createGetTraysReq(){
     {
         return GetOneKindAnimalPackageReq.newBuilder().setId(x).build();
     }
+
     public static GetTrayReq createGetTrayReq(int x){
         return GetTrayReq.newBuilder().setId(x).build();
     }

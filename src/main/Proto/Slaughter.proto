@@ -129,9 +129,16 @@ message PutOneKindAnimalPackageRes{
 message DTOTray{
   int32 id=1;
   double maxWeight=2;
-
-
 }
+
+message CreateTrayReq{
+  double maxWeight=1;
+}
+
+message CreateTrayRes{
+  string resp=1;
+}
+
 message GetTrayReq{
   int32 id = 1;
 }
@@ -141,8 +148,8 @@ message GetTrayRes{
 
 }
 message PutTrayReq{
-  DTOTray ominous=1;
-  DTOAnimalPart animalPart=2;
+  int32 ominous=1;
+  int32 animalPart=2;
 }
 message PutTrayRes{
   string resp=1;
@@ -190,6 +197,7 @@ service SlaughterService{
   rpc getAnimalParts(GetAnimalPartsReq) returns (GetAnimalPartsRes);
 
   rpc putAnimalPart(PutAnimalPartReq) returns (PutAnimalPartRes);
+  rpc createTray(CreateTrayReq) returns(CreateTrayRes);
   rpc getTray(GetTrayReq) returns(GetTrayRes);
   rpc putTray(PutTrayReq) returns(PutTrayRes);
   rpc getTrays(GetTraysReq) returns(GetTraysRes);
